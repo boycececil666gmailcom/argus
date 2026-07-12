@@ -27,15 +27,6 @@ Theme changes
 
 ![Argus TUI dashboard — teal dark theme](docs/screenshots/tui-dashboard-teal.png)
 
----
-
-## Design rationale
-
-```
-Requirements Definition → Basic System Design → Detailed System Design
-```
-
----
 
 ### Requirements Definition
 
