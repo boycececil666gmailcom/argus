@@ -20,7 +20,7 @@ from .autostart import is_enabled as autostart_is_enabled
 from .autostart import toggle as autostart_toggle
 from .config import DATA_DIR, IDLE_THRESHOLD, POLL_INTERVAL, categorise
 from .config import load_settings, save_settings
-from .i18n import LANGUAGES, cycle_language, get_language, set_language, t
+from .i18n import t
 from .report import _aggregate, _bar, _fmt
 from .storage import db_stats, init_db, query_range, record
 
@@ -92,12 +92,6 @@ def _autostart_label() -> str:
     except Exception:
         enabled = False
     return t("auto_start_on") if enabled else t("auto_start_off")
-
-
-def _lang_label() -> str:
-    """Return the language button label, e.g. 'EN  English'."""
-    code = get_language()
-    return f"{code.upper()}  {LANGUAGES[code]}"
 
 
 # endregion
@@ -189,7 +183,6 @@ class HelpScreen(ModalScreen):
                 "  [bold cyan]?[/]   This help screen\n"
                 "  [bold cyan]R[/]   Refresh all data\n"
                 "  [bold cyan]T[/]   Cycle colour theme\n"
-                "  [bold cyan]L[/]   Cycle language\n"
                 "  [bold cyan]A[/]   Toggle Auto Start (launch at login)\n"
                 "  [bold cyan]O[/]   Open folder where Argus saves files\n"
                 "  [bold cyan]Q[/]   Quit\n"
@@ -199,7 +192,6 @@ class HelpScreen(ModalScreen):
             yield Label("Toolbar buttons", classes="help-heading")
             yield Static(
                 f"  [dim]Auto Start ON/OFF[/]   toggle login auto-start\n"
-                f"  [dim]EN  English[/]          cycle language\n"
                 f"  [dim]Open saved data folder[/]   database and settings under [cyan]{DATA_DIR}[/]"
             )
             yield Rule()
@@ -260,7 +252,6 @@ class WelcomeScreen(ModalScreen):
             yield Static(
                 "  [cyan]*[/] The dashboard is already updating live\n"
                 "  [cyan]*[/] Press [bold]T[/] to change the colour theme\n"
-                "  [cyan]*[/] Press [bold]L[/] to change the language\n"
                 "  [cyan]*[/] Press [bold]A[/] to enable Auto Start at login\n"
                 "  [cyan]*[/] Press [bold]?[/] anytime to see all shortcuts\n"
                 "  [cyan]*[/] Press [bold]Q[/] to quit"
@@ -377,10 +368,6 @@ class ArgusApp(App):
         min-width: 20;
     }
 
-    #btn-language {
-        min-width: 16;
-    }
-
     #btn-open-db {
         min-width: 16;
     }
@@ -390,7 +377,6 @@ class ArgusApp(App):
         Binding("q", "quit", "Quit"),
         Binding("r", "refresh", "Refresh"),
         Binding("t", "cycle_theme", "Theme"),
-        Binding("l", "cycle_language", "Language"),
         Binding("a", "toggle_autostart", "Auto Start"),
         Binding("o", "open_db_folder", "Data folder"),
         Binding("left_square_bracket", "day_prev", "Day −"),
@@ -410,7 +396,6 @@ class ArgusApp(App):
             with Horizontal(id="toolbar"):
                 yield Label(str(DATA_DIR), id="db-path")
                 yield Button(_autostart_label(), id="btn-autostart")
-                yield Button(_lang_label(), id="btn-language")
                 yield Button(t("open_db_folder"), id="btn-open-db")
 
             yield Rule()
@@ -489,18 +474,7 @@ class ArgusApp(App):
         self.query_one("#weekly-cats",  DataTable).add_columns(*cols_cats)
         self.query_one("#weekly-apps",  DataTable).add_columns(*cols_apps)
 
-    def _rebuild_for_language(self) -> None:
-        """Rebuild all language-sensitive UI after a language switch."""
-        self.sub_title = t("subtitle")
-        self.query_one("#btn-open-db",   Button).label = t("open_db_folder")
-        self.query_one("#btn-language",  Button).label = _lang_label()
-        self.query_one("#btn-autostart", Button).label = _autostart_label()
-        self.query_one("#btn-day-today", Button).label = t("nav_today")
-        self.query_one("#btn-week-this", Button).label = t("nav_this_week")
-        for sel in ("#today-apps", "#today-cats", "#weekly-days", "#weekly-cats", "#weekly-apps"):
-            self.query_one(sel, DataTable).clear(columns=True)
-        self._setup_tables()
-        self._refresh()
+
 
     def _refresh(self) -> None:
         """Refresh the status widget, today's tables, and the weekly tables."""
@@ -705,12 +679,6 @@ class ArgusApp(App):
         except Exception as exc:
             self.notify(t("autostart_error", str(exc)), severity="error")
 
-    def action_cycle_language(self) -> None:
-        """Advance to the next UI language, persist the choice, and rebuild the UI."""
-        code = cycle_language()
-        save_settings({"language": code})
-        self._rebuild_for_language()
-
     def action_cycle_theme(self) -> None:
         """Advance to the next built-in Textual theme and persist the choice."""
         try:
@@ -734,8 +702,6 @@ class ArgusApp(App):
             self.action_open_db_folder()
         elif bid == "btn-autostart":
             self.action_toggle_autostart()
-        elif bid == "btn-language":
-            self.action_cycle_language()
         elif bid == "btn-day-prev":
             self.action_day_prev()
         elif bid == "btn-day-next":
@@ -762,7 +728,6 @@ def run() -> None:
     It is stopped cleanly via a threading.Event when the app exits.
     """
     settings = load_settings()
-    set_language(settings.get("language", "en"))
 
     saved_theme = settings.get("theme", _THEMES[0])
     if saved_theme not in _THEMES:

@@ -3,11 +3,6 @@
 Supported language codes
 ------------------------
 en  English
-ja  Japanese  (日本語)
-zh  Chinese Simplified  (中文简体)
-fr  French  (Français)
-de  German  (Deutsch)
-es  Spanish  (Español)  — the primary language of Mexico and Latin America
 """
 
 from __future__ import annotations
@@ -16,11 +11,6 @@ from __future__ import annotations
 
 LANGUAGES: dict[str, str] = {
     "en": "English",
-    "ja": "日本語",
-    "zh": "中文",
-    "fr": "Français",
-    "de": "Deutsch",
-    "es": "Español",
 }
 
 # endregion
@@ -64,192 +54,6 @@ STRINGS: dict[str, dict[str, str]] = {
         "idle":                 "IDLE — {}s",
         "active_sec":           "{}s active",
     },
-
-    # ── Japanese ──────────────────────────────────────────────────────────────
-    "ja": {
-        "subtitle":             "アクティビティトラッカー",
-        "help":                 "ヘルプ",
-        "get_started":          "始める",
-        "app":                  "アプリ",
-        "time":                 "時間",
-        "bar":                  "バー",
-        "pct":                  "%",
-        "category":             "カテゴリ",
-        "day":                  "曜日",
-        "active":               "アクティブ",
-        "top_app":              "主要アプリ",
-        "window":               "ウィンドウ",
-        "idle_header":          "アイドル",
-        "snapshots":            "記録数",
-        "today_label":          "今日 — {}",
-        "week_label":           "今週 — {} – {}",
-        "total_active_today":   "今日の合計: {}  ·  {} 件",
-        "no_data_today":        "今日のデータはありません。",
-        "weekly_total":         "今週の合計: {}",
-        "no_data_week":         "今週のデータはありません。",
-        "day_past_label":       "日付 — {}",
-        "week_past_label":      "{} – {}",
-        "nav_today":            "今日",
-        "nav_this_week":        "今週",
-        "open_db_folder":       "保存フォルダを開く",
-        "auto_start_on":        "自動起動  ON",
-        "auto_start_off":       "自動起動  OFF",
-        "autostart_enabled":    "自動起動が有効になりました。",
-        "autostart_disabled":   "自動起動が無効になりました。",
-        "autostart_error":      "自動起動の切替に失敗: {}",
-        "no_window":            "アクティブウィンドウが検出されません。",
-        "idle":                 "アイドル — {}秒",
-        "active_sec":           "{}秒 アクティブ",
-    },
-
-    # ── Chinese Simplified ────────────────────────────────────────────────────
-    "zh": {
-        "subtitle":             "活动追踪器",
-        "help":                 "帮助",
-        "get_started":          "开始",
-        "app":                  "应用",
-        "time":                 "时间",
-        "bar":                  "进度",
-        "pct":                  "%",
-        "category":             "类别",
-        "day":                  "日期",
-        "active":               "活跃",
-        "top_app":              "主要应用",
-        "window":               "窗口",
-        "idle_header":          "闲置",
-        "snapshots":            "记录",
-        "today_label":          "今天 — {}",
-        "week_label":           "本周 — {} – {}",
-        "total_active_today":   "今日总计: {}  ·  {} 条",
-        "no_data_today":        "今天暂无数据。",
-        "weekly_total":         "本周总计: {}",
-        "no_data_week":         "本周暂无数据。",
-        "day_past_label":       "日期 — {}",
-        "week_past_label":      "{} – {}",
-        "nav_today":            "今天",
-        "nav_this_week":        "本周",
-        "open_db_folder":       "打开保存位置",
-        "auto_start_on":        "开机自启  开",
-        "auto_start_off":       "开机自启  关",
-        "autostart_enabled":    "已启用开机自启。",
-        "autostart_disabled":   "已禁用开机自启。",
-        "autostart_error":      "切换自启失败: {}",
-        "no_window":            "未检测到活动窗口。",
-        "idle":                 "闲置 — {}秒",
-        "active_sec":           "{}秒 活跃",
-    },
-
-    # ── French ────────────────────────────────────────────────────────────────
-    "fr": {
-        "subtitle":             "Suivi d'activité",
-        "help":                 "Aide",
-        "get_started":          "Commencer",
-        "app":                  "Application",
-        "time":                 "Durée",
-        "bar":                  "Barre",
-        "pct":                  "%",
-        "category":             "Catégorie",
-        "day":                  "Jour",
-        "active":               "Actif",
-        "top_app":              "Top App",
-        "window":               "Fenêtre",
-        "idle_header":          "Inactivité",
-        "snapshots":            "Captures",
-        "today_label":          "Aujourd'hui — {}",
-        "week_label":           "Cette semaine — {} – {}",
-        "total_active_today":   "Total actif aujourd'hui: {}  ·  {} captures",
-        "no_data_today":        "Aucune donnée aujourd'hui.",
-        "weekly_total":         "Total hebdomadaire: {}",
-        "no_data_week":         "Aucune donnée cette semaine.",
-        "day_past_label":       "Jour — {}",
-        "week_past_label":      "{} – {}",
-        "nav_today":            "Aujourd'hui",
-        "nav_this_week":        "Cette semaine",
-        "open_db_folder":       "Ouvrir le dossier des données",
-        "auto_start_on":        "Démarrage auto  ON",
-        "auto_start_off":       "Démarrage auto  OFF",
-        "autostart_enabled":    "Démarrage automatique activé.",
-        "autostart_disabled":   "Démarrage automatique désactivé.",
-        "autostart_error":      "Impossible de basculer le démarrage auto: {}",
-        "no_window":            "Aucune fenêtre active détectée.",
-        "idle":                 "INACTIF — {}s",
-        "active_sec":           "{}s actif",
-    },
-
-    # ── German ────────────────────────────────────────────────────────────────
-    "de": {
-        "subtitle":             "Aktivitätstracker",
-        "help":                 "Hilfe",
-        "get_started":          "Loslegen",
-        "app":                  "App",
-        "time":                 "Zeit",
-        "bar":                  "Balken",
-        "pct":                  "%",
-        "category":             "Kategorie",
-        "day":                  "Tag",
-        "active":               "Aktiv",
-        "top_app":              "Top-App",
-        "window":               "Fenster",
-        "idle_header":          "Leerlauf",
-        "snapshots":            "Einträge",
-        "today_label":          "Heute — {}",
-        "week_label":           "Diese Woche — {} – {}",
-        "total_active_today":   "Heute aktiv: {}  ·  {} Einträge",
-        "no_data_today":        "Heute keine Daten erfasst.",
-        "weekly_total":         "Wöchentlich aktiv: {}",
-        "no_data_week":         "Keine Daten für diese Woche.",
-        "day_past_label":       "Tag — {}",
-        "week_past_label":      "{} – {}",
-        "nav_today":            "Heute",
-        "nav_this_week":        "Diese Woche",
-        "open_db_folder":       "Datenordner öffnen",
-        "auto_start_on":        "Autostart  AN",
-        "auto_start_off":       "Autostart  AUS",
-        "autostart_enabled":    "Autostart aktiviert.",
-        "autostart_disabled":   "Autostart deaktiviert.",
-        "autostart_error":      "Autostart konnte nicht umgeschaltet werden: {}",
-        "no_window":            "Kein aktives Fenster erkannt.",
-        "idle":                 "LEERLAUF — {}s",
-        "active_sec":           "{}s aktiv",
-    },
-
-    # ── Spanish ───────────────────────────────────────────────────────────────
-    # Primary language of Mexico and most of Latin America.
-    "es": {
-        "subtitle":             "Rastreador de actividad",
-        "help":                 "Ayuda",
-        "get_started":          "Empezar",
-        "app":                  "Aplicación",
-        "time":                 "Tiempo",
-        "bar":                  "Barra",
-        "pct":                  "%",
-        "category":             "Categoría",
-        "day":                  "Día",
-        "active":               "Activo",
-        "top_app":              "App principal",
-        "window":               "Ventana",
-        "idle_header":          "Inactivo",
-        "snapshots":            "Registros",
-        "today_label":          "Hoy — {}",
-        "week_label":           "Esta semana — {} – {}",
-        "total_active_today":   "Total activo hoy: {}  ·  {} registros",
-        "no_data_today":        "Sin datos hoy.",
-        "weekly_total":         "Total semanal: {}",
-        "no_data_week":         "Sin datos esta semana.",
-        "day_past_label":       "Día — {}",
-        "week_past_label":      "{} – {}",
-        "nav_today":            "Hoy",
-        "nav_this_week":        "Esta semana",
-        "open_db_folder":       "Abrir carpeta de datos",
-        "auto_start_on":        "Inicio auto  ON",
-        "auto_start_off":       "Inicio auto  OFF",
-        "autostart_enabled":    "Inicio automático activado.",
-        "autostart_disabled":   "Inicio automático desactivado.",
-        "autostart_error":      "No se pudo cambiar el inicio automático: {}",
-        "no_window":            "No se detectó ventana activa.",
-        "idle":                 "INACTIVO — {}s",
-        "active_sec":           "{}s activo",
-    },
 }
 
 # endregion
@@ -271,7 +75,7 @@ def set_language(code: str) -> None:
 
 
 def get_language() -> str:
-    """Return the active language code (e.g. 'en', 'ja')."""
+    """Return the active language code (e.g. 'en')."""
     return _current_lang
 
 
